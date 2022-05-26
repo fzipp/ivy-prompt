@@ -14,7 +14,7 @@ import (
 	"github.com/peterh/liner"
 )
 
-var specialHelp = regexp.MustCompile("^\\s*\\)\\s*help\\s*$")
+var specialHelp = regexp.MustCompile(`^\s*\)\s*help\s*$`)
 
 func makeCompleter(ivy *Ivy) liner.WordCompleter {
 	return func(line string, pos int) (head string, completions []string, tail string) {

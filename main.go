@@ -16,9 +16,9 @@ import (
 )
 
 var (
-	opMultiline   = regexp.MustCompile("^\\s*op\\s*.*=\\s*$")
-	specialDemo   = regexp.MustCompile("^\\s*\\)\\s*demo\\s*$")
-	specialPrompt = regexp.MustCompile("^\\s*\\)\\s*prompt.*$")
+	opMultiline   = regexp.MustCompile(`^\s*op\s*.*=\s*$`)
+	specialDemo   = regexp.MustCompile(`^\s*\)\s*demo\s*$`)
+	specialPrompt = regexp.MustCompile(`^\s*\)\s*prompt.*$`)
 )
 
 func main() {
