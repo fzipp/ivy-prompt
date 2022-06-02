@@ -5,6 +5,7 @@
 package main
 
 import (
+	"os"
 	"regexp"
 	"sort"
 	"strings"
@@ -14,7 +15,11 @@ import (
 	"github.com/peterh/liner"
 )
 
-var specialHelp = regexp.MustCompile(`^\s*\)\s*help\s*$`)
+var (
+	specialHelp = regexp.MustCompile(`^\s*\)\s*help\s*$`)
+	specialGet  = regexp.MustCompile(`^\s*\)\s*get\s*["']$`)
+	specialSave = regexp.MustCompile(`^\s*\)\s*save\s*["']$`)
+)
 
 func makeCompleter(ivy *Ivy) liner.WordCompleter {
 	return func(line string, pos int) (head string, completions []string, tail string) {
@@ -26,11 +31,15 @@ func makeCompleter(ivy *Ivy) liner.WordCompleter {
 		wordStart := strings.LastIndexFunc(line[:idx], isNotAlphaNum) + 1
 		partialWord := strings.ToLower(line[wordStart:idx])
 		beforeWord := strings.TrimSpace(line[:wordStart])
+		suffix := " "
 		words := keywords
 		if beforeWord == ")" {
 			words = specials
 		} else if specialHelp.MatchString(beforeWord) {
 			words = append(words, helpTopics...)
+		} else if specialGet.MatchString(beforeWord) || specialSave.MatchString(beforeWord) {
+			words = fileNames()
+			suffix = ""
 		} else {
 			ops, err := ivy.Ops()
 			if err == nil {
@@ -39,12 +48,26 @@ func makeCompleter(ivy *Ivy) liner.WordCompleter {
 		}
 		for _, word := range words {
 			if strings.HasPrefix(strings.ToLower(word), partialWord) {
-				completions = append(completions, word+" ")
+				completions = append(completions, word+suffix)
 			}
 		}
 		sort.Strings(completions)
 		return line[:wordStart], completions, line[idx:]
 	}
+}
+
+func fileNames() []string {
+	entries, err := os.ReadDir(".")
+	if err != nil {
+		return nil
+	}
+	var files []string
+	for _, entry := range entries {
+		if !entry.IsDir() {
+			files = append(files, entry.Name())
+		}
+	}
+	return files
 }
 
 func isNotAlphaNum(r rune) bool {
