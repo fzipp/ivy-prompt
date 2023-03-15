@@ -1,6 +1,6 @@
 # ivy-prompt
 
-A line editor interface wrapper for Rob Pike's [Ivy](https://github.com/robpike/ivy),
+A line editor interface wrapper for Rob Pike's [Ivy](https://robpike.io/ivy),
 an [APL](https://tryapl.org/)-like big number calculator. It provides a
 [Readline](https://tiswww.case.edu/php/chet/readline/rltop.html)-style input
 prompt with an input history and tab-completion.
