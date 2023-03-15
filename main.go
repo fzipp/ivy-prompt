@@ -89,7 +89,11 @@ func readEvalPrint(ivy *Ivy, l *liner.State, origMode, linerMode liner.ModeAppli
 		if err != nil {
 			return err
 		}
-		fmt.Print(ivy.readResponse())
+		resp, err := ivy.readResponse()
+		if err != nil {
+			return err
+		}
+		fmt.Print(resp)
 	}
 	l.AppendHistory(input)
 	return nil

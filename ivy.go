@@ -25,11 +25,11 @@ func NewIvy() (*Ivy, error) {
 	cmd := exec.Command("ivy")
 	in, err := cmd.StdinPipe()
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("could not connect to ivy input: %w", err)
 	}
 	outPipe, err := cmd.StdoutPipe()
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("could not connect to ivy output: %w", err)
 	}
 	cmd.Stderr = cmd.Stdout
 	out := bufio.NewReader(outPipe)
@@ -39,7 +39,7 @@ func NewIvy() (*Ivy, error) {
 func (ivy *Ivy) Start() error {
 	err := ivy.cmd.Start()
 	if err != nil {
-		return err
+		return fmt.Errorf("could not start ivy: %w", err)
 	}
 	return ivy.setInternalPrompt()
 }
@@ -47,15 +47,15 @@ func (ivy *Ivy) Start() error {
 func (ivy *Ivy) Exec(stmt string) (string, error) {
 	_, err := fmt.Fprintln(ivy.in, stmt)
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("could not execute ivy statement: %w", err)
 	}
-	return ivy.readResponse(), nil
+	return ivy.readResponse()
 }
 
 func (ivy *Ivy) Ops() ([]string, error) {
 	output, err := ivy.Exec(")op")
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("could not get list of user-defined ops: %w", err)
 	}
 	lines := strings.Split(output, "\n")
 	var ops []string
@@ -70,17 +70,23 @@ func (ivy *Ivy) Ops() ([]string, error) {
 func (ivy *Ivy) Quit() error {
 	err := ivy.cmd.Process.Signal(os.Kill)
 	if err != nil {
-		return err
+		return fmt.Errorf("could not quit ivy process: %w", err)
 	}
 	return ivy.cmd.Wait()
 }
 
 func (ivy *Ivy) setInternalPrompt() error {
 	_, err := ivy.Exec(fmt.Sprintf(`)prompt "%c"`, ivy.internalPrompt))
-	return err
+	if err != nil {
+		return fmt.Errorf("could not set internal prompt: %w", err)
+	}
+	return nil
 }
 
-func (ivy *Ivy) readResponse() string {
-	s, _ := ivy.out.ReadString(ivy.internalPrompt)
-	return s[:len(s)-2]
+func (ivy *Ivy) readResponse() (string, error) {
+	s, err := ivy.out.ReadString(ivy.internalPrompt)
+	if err != nil {
+		return "", fmt.Errorf("could not read response from ivy: %w", err)
+	}
+	return s[:len(s)-2], nil
 }
