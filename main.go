@@ -2,6 +2,11 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+// Ivy-prompt is a line editor interface wrapper for Rob Pike's [Ivy],
+// an APL-like big number calculator. It provides a Readline-style input
+// prompt with an input history and tab-completion.
+//
+// [Ivy]: https://robpike.io/ivy
 package main
 
 import (
