@@ -40,7 +40,7 @@ func main() {
 Type ")help" for help, Ctrl-D to quit.`)
 
 	l := liner.NewLiner()
-	defer printErr(l.Close())
+	defer func() { printErr(l.Close()) }()
 	l.SetWordCompleter(makeCompleter(ivy))
 	l.SetTabCompletionStyle(liner.TabPrints)
 
