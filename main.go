@@ -34,7 +34,7 @@ func main() {
 	check(err)
 	err = ivy.Start()
 	check(err)
-	defer printErr(ivy.Quit())
+	defer func() { printErr(ivy.Quit()) }()
 
 	fmt.Println(`Ivy big number calculator. https://robpike.io/ivy
 Type ")help" for help, Ctrl-D to quit.`)
