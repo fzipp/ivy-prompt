@@ -59,6 +59,8 @@ func makeCompleter(ivy *Ivy) liner.WordCompleter {
 func fileNames() []string {
 	entries, err := os.ReadDir(".")
 	if err != nil {
+		// don't report error, because file name completion
+		// is optional
 		return nil
 	}
 	var files []string

@@ -5,6 +5,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -19,6 +20,10 @@ func loadHistory(l *liner.State) error {
 	}
 	f, err := os.Open(path)
 	if err != nil {
+		if errors.Is(err, os.ErrNotExist) {
+			// don't bother if no history file exists
+			return nil
+		}
 		return fmt.Errorf("could not open history file: %w", err)
 	}
 	defer f.Close()

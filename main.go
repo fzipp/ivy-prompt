@@ -34,17 +34,18 @@ func main() {
 	check(err)
 	err = ivy.Start()
 	check(err)
-	defer ivy.Quit()
+	defer printErr(ivy.Quit())
 
 	fmt.Println("Ivy big number calculator. https://robpike.io/ivy\nType \")help\" for help, Ctrl-D to quit.")
 
 	l := liner.NewLiner()
-	defer l.Close()
+	defer printErr(l.Close())
 	l.SetWordCompleter(makeCompleter(ivy))
 	l.SetTabCompletionStyle(liner.TabPrints)
 
 	linerMode, err := liner.TerminalMode()
 	if err != nil {
+		printErr(fmt.Errorf("could not determine terminal mode: %w", err))
 		return
 	}
 
@@ -53,14 +54,17 @@ func main() {
 		err = readEvalPrint(ivy, l, origMode, linerMode)
 	}
 	if err != io.EOF {
-		fmt.Fprintln(os.Stderr, err)
+		printErr(err)
+		// continue in order to save history
 	}
 	err = saveHistory(l)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Could not save history: %s\n", err)
+		printErr(fmt.Errorf("could not save history: %w", err))
 	}
 }
 
+// An io.EOF error is returned if the user signals end-of-file
+// by pressing Ctrl-D.
 func readEvalPrint(ivy *Ivy, l *liner.State, origMode, linerMode liner.ModeApplier) error {
 	input, err := l.Prompt("ivy> ")
 	if err != nil {
@@ -69,12 +73,12 @@ func readEvalPrint(ivy *Ivy, l *liner.State, origMode, linerMode liner.ModeAppli
 	if specialDemo.MatchString(input) {
 		err = origMode.ApplyMode()
 		if err != nil {
-			return err
+			return fmt.Errorf("could not apply original terminal mode: %w", err)
 		}
 		runDemo()
 		err = linerMode.ApplyMode()
 		if err != nil {
-			return err
+			return fmt.Errorf("could not apply terminal mode for line editor: %w", err)
 		}
 	} else if specialPrompt.MatchString(input) {
 		fmt.Println("prompt special command not yet supported in ivy-prompt")
@@ -85,13 +89,10 @@ func readEvalPrint(ivy *Ivy, l *liner.State, origMode, linerMode liner.ModeAppli
 				return err
 			}
 		}
-		_, err = fmt.Fprintln(ivy.in, input)
+		var resp string
+		resp, err = ivy.Exec(input)
 		if err != nil {
-			return err
-		}
-		resp, err := ivy.readResponse()
-		if err != nil {
-			return err
+			return fmt.Errorf("could not execute input: %w", err)
 		}
 		fmt.Print(resp)
 	}
@@ -106,10 +107,12 @@ func runDemo() {
 	cmd.Stderr = os.Stderr
 	err := cmd.Run()
 	if err != nil {
-		fmt.Println("Could not run demo:", err)
+		printErr(fmt.Errorf("could not run demo: %w", err))
 	}
 }
 
+// An io.EOF error is returned if the user signals end-of-file
+// by pressing Ctrl-D.
 func readMultiline(l *liner.State, firstLine string) (string, error) {
 	var b strings.Builder
 	b.WriteString(firstLine)
@@ -129,7 +132,13 @@ func readMultiline(l *liner.State, firstLine string) (string, error) {
 
 func check(err error) {
 	if err != nil {
-		fmt.Fprintln(os.Stderr, err)
+		printErr(err)
 		os.Exit(1)
+	}
+}
+
+func printErr(err error) {
+	if err != nil {
+		_, _ = fmt.Fprintln(os.Stderr, err)
 	}
 }

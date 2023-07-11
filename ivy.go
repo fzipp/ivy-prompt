@@ -47,7 +47,7 @@ func (ivy *Ivy) Start() error {
 func (ivy *Ivy) Exec(stmt string) (string, error) {
 	_, err := fmt.Fprintln(ivy.in, stmt)
 	if err != nil {
-		return "", fmt.Errorf("could not execute ivy statement: %w", err)
+		return "", fmt.Errorf("could not send input to ivy: %w", err)
 	}
 	return ivy.readResponse()
 }
