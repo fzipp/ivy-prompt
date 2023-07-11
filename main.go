@@ -36,7 +36,8 @@ func main() {
 	check(err)
 	defer printErr(ivy.Quit())
 
-	fmt.Println("Ivy big number calculator. https://robpike.io/ivy\nType \")help\" for help, Ctrl-D to quit.")
+	fmt.Println(`Ivy big number calculator. https://robpike.io/ivy
+Type ")help" for help, Ctrl-D to quit.`)
 
 	l := liner.NewLiner()
 	defer printErr(l.Close())
