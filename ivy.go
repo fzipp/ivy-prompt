@@ -53,18 +53,26 @@ func (ivy *Ivy) Exec(stmt string) (string, error) {
 }
 
 func (ivy *Ivy) Ops() ([]string, error) {
-	output, err := ivy.Exec(")op")
+	return ivy.listDefs("user-defined ops", ")op")
+}
+
+func (ivy *Ivy) Vars() ([]string, error) {
+	return ivy.listDefs("user-defined vars", ")var")
+}
+
+func (ivy *Ivy) listDefs(description, command string) ([]string, error) {
+	output, err := ivy.Exec(command)
 	if err != nil {
-		return nil, fmt.Errorf("could not get list of user-defined ops: %w", err)
+		return nil, fmt.Errorf("could not get list of %s: %w", description, err)
 	}
 	lines := strings.Split(output, "\n")
-	var ops []string
+	var defs []string
 	for _, line := range lines {
 		if line != "" && line[0] == '\t' {
-			ops = append(ops, line[1:])
+			defs = append(defs, line[1:])
 		}
 	}
-	return ops, nil
+	return defs, nil
 }
 
 func (ivy *Ivy) Quit() error {

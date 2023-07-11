@@ -21,7 +21,12 @@ var (
 	specialSave = regexp.MustCompile(`^\s*\)\s*save\s*["']$`)
 )
 
-func makeCompleter(ivy *Ivy) liner.WordCompleter {
+type defsProvider interface {
+	Ops() ([]string, error)
+	Vars() ([]string, error)
+}
+
+func makeCompleter(def defsProvider) liner.WordCompleter {
 	return func(line string, pos int) (head string, completions []string, tail string) {
 		idx := 0
 		for i := 0; i < pos; i++ {
@@ -41,9 +46,13 @@ func makeCompleter(ivy *Ivy) liner.WordCompleter {
 			words = fileNames()
 			suffix = ""
 		} else {
-			ops, err := ivy.Ops()
+			ops, err := def.Ops()
 			if err == nil {
 				words = append(words, ops...)
+			}
+			vars, err := def.Vars()
+			if err == nil {
+				words = append(words, vars...)
 			}
 		}
 		for _, word := range words {
