@@ -18,12 +18,14 @@ var keywords = []string{
 	"code",
 	"cos",
 	"cosh",
+	"count",
 	"decode",
 	"div",
 	"down",
 	"drop",
 	"encode",
 	"fill",
+	"flatten",
 	"flip",
 	"float",
 	"floor",
@@ -31,6 +33,7 @@ var keywords = []string{
 	"imag",
 	"imod",
 	"in",
+	"intersect",
 	"iota",
 	"ivy",
 	"j",
@@ -57,6 +60,8 @@ var keywords = []string{
 	"tanh",
 	"text",
 	"transp",
+	"union",
+	"unique",
 	"up",
 	"xor",
 }
@@ -78,6 +83,7 @@ var specials = []string{
 	"prompt",
 	"save",
 	"seed",
+	"var",
 }
 
 var helpTopics = []string{
