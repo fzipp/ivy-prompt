@@ -50,7 +50,7 @@ Type ")help" for help, Ctrl-D to quit.`)
 		return
 	}
 
-	_ = loadHistory(l)
+	printErr(loadHistory(l))
 	for err == nil {
 		err = readEvalPrint(ivy, l, origMode, linerMode)
 	}

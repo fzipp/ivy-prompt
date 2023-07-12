@@ -16,12 +16,13 @@ import (
 func loadHistory(l *liner.State) error {
 	path, err := historyPath()
 	if err != nil {
-		return fmt.Errorf("no config directory to load history from: %w", err)
+		// do nothing if no path to history file can be determined
+		return nil
 	}
 	f, err := os.Open(path)
 	if err != nil {
 		if errors.Is(err, os.ErrNotExist) {
-			// don't bother if no history file exists
+			// do nothing if no history file exists
 			return nil
 		}
 		return fmt.Errorf("could not open history file: %w", err)
@@ -37,7 +38,11 @@ func loadHistory(l *liner.State) error {
 func saveHistory(l *liner.State) error {
 	path, err := historyPath()
 	if err != nil {
-		return fmt.Errorf("no config directory to save history: %w", err)
+		return fmt.Errorf("no path for history file: %w", err)
+	}
+	err = os.MkdirAll(filepath.Dir(path), 0o700)
+	if err != nil {
+		return fmt.Errorf("could not create ivy configuration directory: %w", err)
 	}
 	f, err := os.Create(path)
 	if err != nil {
@@ -56,10 +61,5 @@ func historyPath() (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("could not determine user config directory: %w", err)
 	}
-	ivyDir := filepath.Join(configDir, "ivy")
-	err = os.MkdirAll(ivyDir, 0o700)
-	if err != nil {
-		return "", fmt.Errorf("could not create ivy configuration directory: %w", err)
-	}
-	return filepath.Join(ivyDir, "ivy_history"), nil
+	return filepath.Join(configDir, "ivy", "ivy_history"), nil
 }
