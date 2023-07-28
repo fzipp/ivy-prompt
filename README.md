@@ -1,28 +1,29 @@
 # ivy-prompt
 
 A line editor interface wrapper for Rob Pike's [Ivy](https://robpike.io/ivy),
-an [APL](https://tryapl.org/)-like big number calculator. It provides a
+an interpreter for an [APL](https://tryapl.org/)-like language.
+It provides a
 [Readline](https://tiswww.case.edu/php/chet/readline/rltop.html)-style input
-prompt with an input history and tab-completion.
+prompt with input history and tab-completion.
 
 The original `ivy` command interacts with the world via _standard input/output_,
-which integrates well with a Unix or
-[Plan 9](https://p9f.org) environment or a  text editor like
+integrating well with a Unix or
+[Plan 9](https://p9f.org) environment or a text editor like
 [Acme](https://research.swtch.com/acme).
 However, if you prefer or are used to a mode of interaction more akin to Bash,
-Haskell's GHCi or Python's REPL with an interactive line editor, then this
+Haskell's GHCi, or Python's REPL with an interactive line editor, then this
 project is for you.
 
-Even though Ivy is described by its author as "a plaything" it should not
+Although Ivy is described by its creator as "a plaything," it should not
 be underestimated.
 [Watch Russ Cox' videos](https://www.youtube.com/playlist?list=PLrwpzH1_9ufMLOB6BAdzO08Qx-9jHGfGg)
 of solutions for [Advent of Code 2021](https://adventofcode.com/2021)
-using Ivy for a demonstration of its capabilities, or take the built-in
+using Ivy for a demonstration of its capabilities or take the built-in
 tour with the `)demo` command.
 
 ## Installation
 
-Install Ivy itself, if you haven't already done so:
+First install Ivy itself, if you haven't already done so:
 
 ```
 go install robpike.io/ivy@latest
@@ -30,7 +31,7 @@ go install robpike.io/ivy@latest
 
 The `ivy` binary should be in the `PATH`.
 
-Install this wrapper:
+Then install this wrapper:
 
 ```
 go install github.com/fzipp/ivy-prompt@latest
