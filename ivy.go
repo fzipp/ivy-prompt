@@ -53,11 +53,11 @@ func (ivy *Ivy) Exec(stmt string) (string, error) {
 }
 
 func (ivy *Ivy) Ops() ([]string, error) {
-	return ivy.listDefs("user-defined ops", ")op")
+	return ivy.listDefs("user-defined operators", ")op")
 }
 
 func (ivy *Ivy) Vars() ([]string, error) {
-	return ivy.listDefs("user-defined vars", ")var")
+	return ivy.listDefs("defined variables", ")var")
 }
 
 func (ivy *Ivy) listDefs(description, command string) ([]string, error) {
