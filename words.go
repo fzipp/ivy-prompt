@@ -57,6 +57,7 @@ var keywords = []string{
 	"sin",
 	"sinh",
 	"sqrt",
+	"sys",
 	"take",
 	"tan",
 	"tanh",
