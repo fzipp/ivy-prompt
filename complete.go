@@ -19,6 +19,7 @@ var (
 	specialHelp = regexp.MustCompile(`^\s*\)\s*help\s*$`)
 	specialGet  = regexp.MustCompile(`^\s*\)\s*get\s*["']$`)
 	specialSave = regexp.MustCompile(`^\s*\)\s*save\s*["']$`)
+	opSys       = regexp.MustCompile(`(|.*\s+)sys(|\s*["'])$`)
 )
 
 type defsProvider interface {
@@ -44,6 +45,14 @@ func makeCompleter(def defsProvider) liner.WordCompleter {
 			words = append(words, helpTopics...)
 		} else if specialGet.MatchString(beforeWord) || specialSave.MatchString(beforeWord) {
 			words = fileNames()
+			suffix = ""
+		} else if opSys.MatchString(beforeWord) {
+			last := beforeWord[len(beforeWord)-1]
+			if last == '"' || last == '\'' {
+				words = sysTopics
+			} else {
+				words = []string{"\""}
+			}
 			suffix = ""
 		} else {
 			ops, err := def.Ops()

@@ -101,3 +101,21 @@ var helpTopics = []string{
 	"types",
 	"unary",
 }
+
+var sysTopics = []string{
+	"help",
+	"base",
+	"cpu",
+	"date",
+	"format",
+	"ibase",
+	"maxbits",
+	"maxdigits",
+	"maxstack",
+	"now",
+	"obase",
+	"origin",
+	"prompt",
+	"sec",
+	"time",
+}
