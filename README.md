@@ -57,6 +57,21 @@ a complete table of supported keystrokes / actions. Here's a small selection:
 | Ctrl-L    | Clear screen (line is unmodified) |
 | Ctrl-D    | (if line is empty) quit           |
 
+## History
+
+The history is preserved across sessions
+in a file named `ivy_history`
+within the `ivy` subdirectory,
+located within the user configuration directory.
+The specific location of this directory
+depends on the operating system:
+
+| Operating system | Config directory                         |
+|------------------|------------------------------------------|
+| Linux/Unix       | `$XDG_CONFIG_HOME/ivy/`                  |
+| macOS            | `$HOME/Library/Application Support/ivy/` |
+| Windows          | `%AppData%\ivy\`                         |
+
 ## License
 
 This project is free and open source software licensed under the
