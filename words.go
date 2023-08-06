@@ -43,6 +43,7 @@ var keywords = []string{
 	"j",
 	"log",
 	"max",
+	"mdiv",
 	"min",
 	"mod",
 	"nand",
