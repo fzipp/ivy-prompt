@@ -26,7 +26,8 @@ tour with the `)demo` command.
 First install Ivy itself, if you haven't already done so:
 
 ```
-go install robpike.io/ivy@latest
+go install robpike.io/ivy@latest    # or @master if you want to use
+                                    # the development version of Ivy.
 ```
 
 The `ivy` binary should be in the `PATH`.
