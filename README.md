@@ -30,7 +30,7 @@ go install robpike.io/ivy@latest    # or @master if you want to use
                                     # the development version of Ivy.
 ```
 
-The `ivy` binary should be in the `PATH`.
+The `ivy` binary needs to be in the `PATH` for ivy-prompt to locate it.
 
 Then install this wrapper:
 
@@ -57,9 +57,19 @@ a complete table of supported keystrokes / actions. Here's a small selection:
 | Ctrl-L    | Clear screen (line is unmodified) |
 | Ctrl-D    | (if line is empty) quit           |
 
-## History
+## Tab-Completion
 
-The history is preserved across sessions
+Tab-completion works not only with built-in identifiers
+but also with user-defined variables and operators.
+
+It is context-aware to some extent.
+For example, it will provide different completion options
+after `)help `, `)get "`, `)save "`, or `sys "`
+compared to the usual context.
+
+## Input History
+
+The input history is preserved across sessions
 in a file named `ivy_history`
 within the `ivy` subdirectory,
 located within the user configuration directory.
