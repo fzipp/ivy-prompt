@@ -51,6 +51,7 @@ var keywords = []string{
 	"nor",
 	"not",
 	"op",
+	"opdelete",
 	"or",
 	"phase",
 	"real",
