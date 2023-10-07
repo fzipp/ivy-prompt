@@ -92,6 +92,7 @@ var specials = []string{
 	"prompt",
 	"save",
 	"seed",
+	"timezone",
 	"var",
 }
 
