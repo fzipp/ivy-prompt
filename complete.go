@@ -30,7 +30,7 @@ type defsProvider interface {
 func makeCompleter(def defsProvider) liner.WordCompleter {
 	return func(line string, pos int) (head string, completions []string, tail string) {
 		idx := 0
-		for i := 0; i < pos; i++ {
+		for range pos {
 			_, width := utf8.DecodeRuneInString(line[idx:])
 			idx += width
 		}
