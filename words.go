@@ -54,6 +54,7 @@ var keywords = []string{
 	"opdelete",
 	"or",
 	"phase",
+	"print",
 	"real",
 	"rho",
 	"rot",
@@ -123,6 +124,7 @@ var sysTopics = []string{
 	"obase",
 	"origin",
 	"prompt",
+	"read",
 	"sec",
 	"time",
 }
