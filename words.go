@@ -53,6 +53,7 @@ var keywords = []string{
 	"op",
 	"opdelete",
 	"or",
+	"part",
 	"phase",
 	"print",
 	"real",
