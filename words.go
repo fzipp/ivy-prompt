@@ -56,6 +56,7 @@ var keywords = []string{
 	"part",
 	"phase",
 	"print",
+	"rand",
 	"real",
 	"rho",
 	"rot",
