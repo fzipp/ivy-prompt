@@ -75,6 +75,7 @@ var keywords = []string{
 	"union",
 	"unique",
 	"up",
+	"where",
 	"xor",
 }
 
