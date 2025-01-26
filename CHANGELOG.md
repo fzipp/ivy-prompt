@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Tab-completion for `part`, `rand`, `where`
+- Tab-completion for `)debug` settings
 
 ## [0.4.0] - 2024-12-12
 

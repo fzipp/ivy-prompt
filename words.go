@@ -131,3 +131,12 @@ var sysTopics = []string{
 	"sec",
 	"time",
 }
+
+var debugSettings = []string{
+	"cpu",
+	"panic",
+	"parse",
+	"tokens",
+	"trace",
+	"types",
+}

@@ -16,10 +16,11 @@ import (
 )
 
 var (
-	specialHelp = regexp.MustCompile(`^\s*\)\s*help\s*$`)
-	specialGet  = regexp.MustCompile(`^\s*\)\s*get\s*["']$`)
-	specialSave = regexp.MustCompile(`^\s*\)\s*save\s*["']$`)
-	opSys       = regexp.MustCompile(`(|.*\s+)sys(|\s*["'])$`)
+	specialHelp  = regexp.MustCompile(`^\s*\)\s*help\s*$`)
+	specialDebug = regexp.MustCompile(`^\s*\)\s*debug\s*$`)
+	specialGet   = regexp.MustCompile(`^\s*\)\s*get\s*["']$`)
+	specialSave  = regexp.MustCompile(`^\s*\)\s*save\s*["']$`)
+	opSys        = regexp.MustCompile(`(|.*\s+)sys(|\s*["'])$`)
 )
 
 type defsProvider interface {
@@ -43,6 +44,8 @@ func makeCompleter(def defsProvider) liner.WordCompleter {
 			words = specials
 		} else if specialHelp.MatchString(beforeWord) {
 			words = append(words, helpTopics...)
+		} else if specialDebug.MatchString(beforeWord) {
+			words = debugSettings
 		} else if specialGet.MatchString(beforeWord) || specialSave.MatchString(beforeWord) {
 			words = fileNames()
 			suffix = ""
