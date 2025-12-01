@@ -51,7 +51,6 @@ var keywords = []string{
 	"nor",
 	"not",
 	"op",
-	"opdelete",
 	"or",
 	"part",
 	"phase",
@@ -81,12 +80,14 @@ var keywords = []string{
 
 var specials = []string{
 	"base",
+	"clear",
 	"cpu",
 	"debug",
 	"demo",
 	"format",
 	"get",
 	"help",
+	"last",
 	"maxbits",
 	"maxdigits",
 	"maxstack",
@@ -97,6 +98,7 @@ var specials = []string{
 	"save",
 	"seed",
 	"timezone",
+	"trace",
 	"var",
 }
 
@@ -139,4 +141,10 @@ var debugSettings = []string{
 	"tokens",
 	"trace",
 	"types",
+}
+
+var clearTopics = []string{
+	"binary",
+	"unary",
+	"var",
 }
