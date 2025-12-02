@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## next
 
 ### Added
-- Tab-completion for `part`, `rand`, `where`, `)clear`, `)last`, `)trace`
+- Tab-completion for `part`, `rand`, `where`, `)clear`, `)last`
 - Tab-completion for `)debug` settings
 - File name completion for `)get` and `)save` without quotes
 

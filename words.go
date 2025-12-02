@@ -98,7 +98,6 @@ var specials = []string{
 	"save",
 	"seed",
 	"timezone",
-	"trace",
 	"var",
 }
 
