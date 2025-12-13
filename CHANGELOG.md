@@ -7,9 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## next
 
+## [0.5.0] - 2024-12-13
+
 ### Added
 - Tab-completion for `part`, `rand`, `where`, `)clear`, `)last`
 - Tab-completion for `)debug` settings
+- Tab-completion for control flow keywords
+  `:while`, `:if`, `:elif`, `:else`, `:end`, `:ret`
 - File name completion for `)get` and `)save` without quotes
 
 ## [0.4.0] - 2024-12-12

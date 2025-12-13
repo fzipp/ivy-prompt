@@ -76,6 +76,14 @@ var keywords = []string{
 	"up",
 	"where",
 	"xor",
+
+	// Control flow keywords
+	":elif",
+	":else",
+	":end",
+	":if",
+	":ret",
+	":while",
 }
 
 var specials = []string{

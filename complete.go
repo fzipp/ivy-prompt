@@ -36,7 +36,7 @@ func makeCompleter(def defsProvider) liner.WordCompleter {
 			_, width := utf8.DecodeRuneInString(line[idx:])
 			idx += width
 		}
-		wordStart := strings.LastIndexFunc(line[:idx], isNotAlphaNum) + 1
+		wordStart := strings.LastIndexFunc(line[:idx], isNotIdentifierOrKeyword) + 1
 		partialWord := strings.ToLower(line[wordStart:idx])
 		beforeWord := strings.TrimSpace(line[:wordStart])
 		suffix := " "
@@ -96,6 +96,6 @@ func fileNames() []string {
 	return files
 }
 
-func isNotAlphaNum(r rune) bool {
-	return !unicode.IsLetter(r) && !unicode.IsDigit(r)
+func isNotIdentifierOrKeyword(r rune) bool {
+	return !(unicode.IsLetter(r) || unicode.IsDigit(r) || r == ':')
 }
