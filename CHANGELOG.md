@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## next
 
 ### Added
+- Tab-completion for `last`, `left`, `right`
 - Tab-completion for `)lib`, `sys "prec"`, `sys "trace"`, `sys "write"`
 
 ## [0.5.0] - 2024-12-13
