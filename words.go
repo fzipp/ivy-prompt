@@ -140,6 +140,7 @@ var sysTopics = []string{
 	"read",
 	"sec",
 	"time",
+	"trace",
 }
 
 var debugSettings = []string{
