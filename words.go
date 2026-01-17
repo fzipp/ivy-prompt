@@ -136,11 +136,13 @@ var sysTopics = []string{
 	"now",
 	"obase",
 	"origin",
+	"prec",
 	"prompt",
 	"read",
 	"sec",
 	"time",
 	"trace",
+	"write",
 }
 
 var debugSettings = []string{
