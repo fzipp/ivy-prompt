@@ -96,6 +96,7 @@ var specials = []string{
 	"get",
 	"help",
 	"last",
+	"lib",
 	"maxbits",
 	"maxdigits",
 	"maxstack",
@@ -154,4 +155,10 @@ var clearTopics = []string{
 	"binary",
 	"unary",
 	"var",
+}
+
+var libTopics = []string{
+	"doc",
+	"ops",
+	"vars",
 }

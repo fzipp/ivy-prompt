@@ -19,6 +19,7 @@ var (
 	specialHelp  = regexp.MustCompile(`^\s*\)\s*help\s*$`)
 	specialDebug = regexp.MustCompile(`^\s*\)\s*debug\s*$`)
 	specialClear = regexp.MustCompile(`^\s*\)\s*clear\s*$`)
+	specialLib   = regexp.MustCompile(`^\s*\)\s*lib\s*$`)
 	specialGet   = regexp.MustCompile(`^\s*\)\s*get\s*["']?$`)
 	specialSave  = regexp.MustCompile(`^\s*\)\s*save\s*["']?$`)
 	opSys        = regexp.MustCompile(`(|.*\s+)sys(|\s*["'])$`)
@@ -52,6 +53,8 @@ func makeCompleter(def defsProvider) liner.WordCompleter {
 			suffix = ""
 		} else if specialClear.MatchString(beforeWord) {
 			words = clearTopics
+		} else if specialLib.MatchString(beforeWord) {
+			words = libTopics
 		} else if opSys.MatchString(beforeWord) {
 			last := beforeWord[len(beforeWord)-1]
 			if last == '"' || last == '\'' {
