@@ -74,6 +74,7 @@ var keywords = []string{
 	"tanh",
 	"text",
 	"transp",
+	"trap",
 	"union",
 	"unique",
 	"up",
