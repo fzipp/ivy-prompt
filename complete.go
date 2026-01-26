@@ -54,7 +54,7 @@ func makeCompleter(def defsProvider) liner.WordCompleter {
 		} else if specialClear.MatchString(beforeWord) {
 			words = clearTopics
 		} else if specialLib.MatchString(beforeWord) {
-			words = libTopics
+			words = append(libTopics, libs...)
 		} else if opSys.MatchString(beforeWord) {
 			last := beforeWord[len(beforeWord)-1]
 			if last == '"' || last == '\'' {
