@@ -7,11 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## next
 
+## [0.6.0] - 2026-01-26
+
 ### Added
 - Tab-completion for `last`, `left`, `right`, `trap`
 - Tab-completion for `)lib`, `sys "prec"`, `sys "trace"`, `sys "write"`
 
-## [0.5.0] - 2024-12-13
+## [0.5.0] - 2025-12-13
 
 ### Added
 - Tab-completion for `part`, `rand`, `where`, `)clear`, `)last`
