@@ -144,6 +144,7 @@ var sysTopics = []string{
 	"prompt",
 	"read",
 	"sec",
+	"sleep",
 	"time",
 	"trace",
 	"write",
