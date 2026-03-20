@@ -52,6 +52,7 @@ var keywords = []string{
 	"nand",
 	"nor",
 	"not",
+	"numden",
 	"op",
 	"or",
 	"part",
