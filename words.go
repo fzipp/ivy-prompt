@@ -148,6 +148,7 @@ var sysTopics = []string{
 	"sleep",
 	"time",
 	"trace",
+	"version",
 	"write",
 }
 
